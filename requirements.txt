@@ -1,11 +1,12 @@
-streamlit
+streamlit==1.38.0
 numpy==1.26.3
 opencv-python-headless==4.10.0.84
-tensorflow-cpu==2.15.1
-deepface==0.0.93
+tensorflow==2.15.0
+keras==2.15.0
+deepface==0.0.92
 streamlit-webrtc==0.62.4
 pillow
-pandas
+pandas==2.2.2
 matplotlib
-scikit-learn
+scikit-learn==1.5.2
 av
