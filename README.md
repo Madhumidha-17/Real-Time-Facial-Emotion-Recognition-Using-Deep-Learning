@@ -280,14 +280,13 @@ Output classes:
         Smart surveillance systems
         Customer feedback analysis
         Human-computer interaction
+  
+      <h2>Output</h2>
 
-#output
-
-    
-
-      ![Output 1](OUTPUT-1.png)
-
-       ![Output 2](OUTPUT-2.png)
+   <p>
+  <img src="./OUTPUT-1.png" alt="Output 1" width="45%">
+   <img src="./OUTPUT-2.png" alt="Output 2" width="45%">
+   </p>
 
 👩‍💻 Author
 
