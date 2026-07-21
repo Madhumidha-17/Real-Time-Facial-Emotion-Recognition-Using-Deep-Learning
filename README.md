@@ -281,9 +281,13 @@ Output classes:
         Customer feedback analysis
         Human-computer interaction
 
-📜 License
+#output
 
-     This project is for educational purposes.
+    
+
+      ![Output 1](OUTPUT-1.png)
+
+       ![Output 2](OUTPUT-2.png)
 
 👩‍💻 Author
 
