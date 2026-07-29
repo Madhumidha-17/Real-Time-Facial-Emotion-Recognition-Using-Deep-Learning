@@ -1,11 +1,8 @@
 streamlit
 numpy<2
 opencv-python-headless
-tensorflow==2.15.0
-deepface==0.0.92
-streamlit-webrtc
+tensorflow
+deepface
 pillow
 pandas
-matplotlib
-scikit-learn
-av
+streamlit-webrtc
