@@ -125,6 +125,24 @@ html_code = """
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.15);
         }
+
+        /* 3D Floating Tilt Cards */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            will-change: transform;
+        }
+
+        .pop-out {
+            transform: translateZ(40px);
+            transform-style: preserve-3d;
+        }
+        
+        .pop-out-lg {
+            transform: translateZ(65px);
+            transform-style: preserve-3d;
+        }
     </style>
 </head>
 <body class="relative min-h-screen w-full flex items-center justify-center p-3 sm:p-6 select-none">
@@ -158,7 +176,7 @@ html_code = """
         <main class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch flex-grow my-5 min-h-0">
             
             <!-- Left Side: Source Video / Upload (Glass Card) -->
-            <section class="lg:col-span-7 flex flex-col justify-between glass-card p-4 rounded-2xl border border-white/5 overflow-hidden">
+            <section class="lg:col-span-7 flex flex-col justify-between glass-card p-4 rounded-2xl border border-white/5 overflow-hidden tilt-card">
                 
                 <!-- Tab Switching Panel -->
                 <div class="flex gap-2 p-1 bg-black/30 rounded-xl border border-white/5 mb-4">
@@ -226,17 +244,17 @@ html_code = """
             <section class="lg:col-span-5 flex flex-col gap-5 overflow-hidden">
                 
                 <!-- 1. Highlight Dominant Emotion Panel -->
-                <div class="glass-card p-5 rounded-2xl border border-white/5 flex flex-col items-center justify-center text-center relative overflow-hidden">
+                <div class="glass-card p-5 rounded-2xl border border-white/5 flex flex-col items-center justify-center text-center relative overflow-hidden tilt-card">
                     <div class="absolute -top-16 -right-16 w-32 h-32 rounded-full bg-pink-500/5 blur-2xl pointer-events-none"></div>
                     <span class="text-[9px] text-cyan-400 uppercase tracking-widest font-extrabold mb-2.5">Spotlight emotion</span>
                     
-                    <div id="dominant-emoji" class="text-6xl mb-3 select-none filter drop-shadow-[0_0_15px_rgba(255,255,255,0.15)] transition-all duration-300 transform hover:scale-105">🎭</div>
-                    <h2 id="dominant-name" class="text-3xl font-black tracking-tight text-gray-500 transition-all duration-300">NO FACE</h2>
-                    <p id="dominant-tag" class="text-[10px] text-gray-400 font-medium mt-1">Please stand in front of the camera</p>
+                    <div id="dominant-emoji" class="text-6xl mb-3 select-none filter drop-shadow-[0_0_15px_rgba(255,255,255,0.15)] transition-all duration-300 transform hover:scale-105 pop-out-lg">🎭</div>
+                    <h2 id="dominant-name" class="text-3xl font-black tracking-tight text-gray-500 transition-all duration-300 pop-out">NO FACE</h2>
+                    <p id="dominant-tag" class="text-[10px] text-gray-400 font-medium mt-1 pop-out">Please stand in front of the camera</p>
                 </div>
                 
                 <!-- 2. Breakdown graph list container -->
-                <div class="glass-card p-5 rounded-2xl border border-white/5 flex-grow flex flex-col justify-between min-h-0 overflow-y-auto">
+                <div class="glass-card p-5 rounded-2xl border border-white/5 flex-grow flex flex-col justify-between min-h-0 overflow-y-auto tilt-card">
                     <h3 class="text-xs font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2 border-b border-white/5 pb-2">
                         <i class="fa-solid fa-chart-bar text-pink-400"></i>Probability Metrics
                     </h3>
@@ -374,6 +392,9 @@ html_code = """
                 // Enable mode selectors
                 webcamTab.removeAttribute('disabled');
                 uploadTab.removeAttribute('disabled');
+                
+                // Initialize 3D hover tilt listeners
+                initTiltEffect();
                 
                 // Default mode start
                 switchMode('webcam');
@@ -743,6 +764,39 @@ html_code = """
             emoName.innerText = 'NO FACE';
             emoName.className = 'text-3xl font-black tracking-tight text-gray-500';
             emoTag.innerText = 'Please stand in front of the camera';
+        }
+
+        // 3D Tilt Hover effect logic
+        function initTiltEffect() {
+            const cards = document.querySelectorAll('.tilt-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const xc = rect.width / 2;
+                    const yc = rect.height / 2;
+                    const dx = x - xc;
+                    const dy = y - yc;
+                    
+                    // Rotate maximum of 8 degrees for natural tilt
+                    const rx = -(dy / yc) * 8;
+                    const ry = (dx / xc) * 8;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+                    card.style.boxShadow = `${-ry * 1.5}px ${rx * 1.5}px 35px rgba(6, 182, 212, 0.12), 0 15px 35px rgba(0, 0, 0, 0.4)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+                    card.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.4)';
+                    card.style.transition = 'transform 0.5s ease, box-shadow 0.5s ease';
+                });
+                
+                card.addEventListener('mouseenter', () => {
+                    card.style.transition = 'transform 0.05s ease, box-shadow 0.05s ease';
+                });
+            });
         }
 
         // Fire init call
