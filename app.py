@@ -2,7 +2,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 st.set_page_config(
-    page_title="Pannita AI - Face Emotion Recognition",
+    page_title="Emotion AI - Face Emotion Recognition",
     page_icon="🎭",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -33,7 +33,7 @@ html_code = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pannita AI</title>
+    <title>Emotion AI</title>
     <!-- Google Fonts for premium typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -142,7 +142,7 @@ html_code = """
                     <i class="fa-solid fa-face-smile-wink text-white text-xl"></i>
                 </div>
                 <div class="text-center sm:text-left">
-                    <h1 class="text-2xl font-black tracking-tight bg-gradient-to-r from-cyan-400 via-indigo-200 to-pink-400 bg-clip-text text-transparent">PANNITA AI</h1>
+                    <h1 class="text-2xl font-black tracking-tight bg-gradient-to-r from-cyan-400 via-indigo-200 to-pink-400 bg-clip-text text-transparent">EMOTION AI</h1>
                     <p class="text-[10px] text-cyan-400/80 uppercase font-bold tracking-widest mt-0.5"><i class="fa-solid fa-bolt mr-1"></i>Real-Time Emotion Engine</p>
                 </div>
             </div>
@@ -327,7 +327,7 @@ html_code = """
         <!-- App footer info -->
         <footer class="flex justify-between items-center text-[9px] text-gray-500 border-t border-white/5 pt-3">
             <p><i class="fa-brands fa-chrome mr-1"></i>Processing entirely in client browser</p>
-            <p>© 2026 Pannita AI • Designed by Antigravity</p>
+            <p>© 2026 Emotion AI • Designed by Antigravity</p>
         </footer>
     </div>
 
