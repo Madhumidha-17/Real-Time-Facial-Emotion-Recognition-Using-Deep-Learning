@@ -1,6 +1,7 @@
 
 # 🎭 Real-Time Emotion Detection System
 
+
 A complete, beginner-friendly Python project that detects human faces via webcam
 and classifies emotions in real time using a Convolutional Neural Network (CNN).
 
