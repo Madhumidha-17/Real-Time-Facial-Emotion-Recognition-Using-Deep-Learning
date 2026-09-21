@@ -7,8 +7,9 @@
       "openFiles": [
         "README.md",
         "app.py"
-      ]
-    },
+        }
+  };
+  
     "vscode": {
       "settings": {},
       "extensions": [
